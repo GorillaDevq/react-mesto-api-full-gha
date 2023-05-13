@@ -1,0 +1,11 @@
+.form__sumbit {
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  height: 50px;
+  width: 100%;
+}
+
+.form__sumbit:hover {
+  opacity: 0.85;
+}

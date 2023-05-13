@@ -1,0 +1,51 @@
+.profile__avatar {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.profile__avatar:hover {
+  cursor: pointer;
+}
+
+.profile__avatar::before {
+  content: "";
+  position: absolute;
+  background-image: url(../../../images/button/feather.svg);
+  background-size: cover;
+  height: 26px;
+  width: 26px;
+  top: 47px;
+  left: 47px;
+  opacity: 0;
+  z-index: 1;
+}
+
+.profile__avatar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+}
+
+.profile__avatar:hover::before {
+  opacity: 1;
+}
+
+.profile__avatar:hover::after {
+  opacity: 1;
+}
+
+@media screen and (max-width:986px) {
+  .profile__avatar{
+   margin-bottom: 27px;
+  }
+}
+ 
