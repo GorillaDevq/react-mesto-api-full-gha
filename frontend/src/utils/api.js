@@ -18,12 +18,14 @@ class Api {
 
   getInitialCards() {
     return this._request(this._baseUrl + '/cards', {
+      credentials: 'include',
       headers: this._headers
     })
   }
 
   getUserInfo() {
     return this._request(this._baseUrl + '/users/me', {
+      credentials: 'include',
       headers: this._headers
     })
   }
@@ -31,6 +33,7 @@ class Api {
   setUserInfo({name, about}) {
     return this._request(this._baseUrl + '/users/me', {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -42,6 +45,7 @@ class Api {
   postNewCard({name, link}) {
     return this._request(this._baseUrl + '/cards', {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         name: name,
@@ -54,11 +58,13 @@ class Api {
     if (!checkLike) {
       return this._request(this._baseUrl + '/cards/' + idCard + '/likes', {
         method: 'PUT',
+        credentials: 'include',
         headers: this._headers
       })
     } else {
       return this._request(this._baseUrl + '/cards/' + idCard + '/likes',  {
         method: 'DELETE',
+        credentials: 'include',
         headers: this._headers
       })
     }
@@ -66,6 +72,7 @@ class Api {
   deleteCard(idCard) {
     return this._request(this._baseUrl + '/cards/' + idCard, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         _id: idCard
@@ -76,6 +83,7 @@ class Api {
   setAvatar({avatar}) {
     return this._request(this._baseUrl + '/users/me/avatar',  {
       method: 'PATCH',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatar

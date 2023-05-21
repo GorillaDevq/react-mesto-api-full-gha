@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// eslint-disable-next-line
-const regex = /^(http|https):\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(\/\S*)?$/;
 const NotFoundError = require('./errors/NotFoundError');
+const cors = require('./middlewares/cors');
+const globalHandleError = require('./utils/globalHandleError');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -18,6 +18,8 @@ app.use(cookieParser());
 
 app.use(requestLogger);
 
+app.use(cors);
+
 app.use('/', require('./routes/user'));
 app.use('/', require('./routes/card'));
 
@@ -27,11 +29,6 @@ app.use(errorLogger);
 
 app.use(errors());
 
-app.use((err, req, res, next) => {
-  if (err.statusCode) res.status(err.statusCode).send({ message: err.message });
-  else res.status(500).send({ message: 'На сервере произошла ошибка.' });
-
-  next();
-});
+app.use(globalHandleError);
 
 app.listen(PORT);

@@ -1,15 +1,14 @@
-const baseUrl = 'https://auth.nomoreparties.co'
+import { options } from "./constans"
 export default class Auth {
-  constructor(baseUrl) {
-    this._baseUrl = baseUrl
+  constructor(options) {
+    this._baseUrl = options.baseUrl
+    this._headers = options.headers;
   }
 
   singUp({email, password}) {
     return fetch(this._baseUrl + '/signup', {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json" 
-      },
+      headers: this._headers,
       body: JSON.stringify({
         email: email,
         password: password,
@@ -21,9 +20,8 @@ export default class Auth {
   singIn({email, password}) {
     return fetch(this._baseUrl + '/signin', {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json" 
-      },
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
         email: email,
         password: password,
@@ -32,12 +30,10 @@ export default class Auth {
     .then(res => this._checkResponse(res))
   }
 
-  checkToken(jwt) {
+  checkToken() {
     return fetch(this._baseUrl + '/users/me', {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization" : `Bearer ${jwt}`
-      }
+      credentials: 'include',
+      headers: this._headers,
     })
     .then(res => this._checkResponse(res))
   }
@@ -50,6 +46,6 @@ export default class Auth {
   }
 }
 
-const auth = new Auth(baseUrl)
+const auth = new Auth(options)
 
 export { auth }

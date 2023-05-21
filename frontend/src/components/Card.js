@@ -8,6 +8,8 @@ export default function Card(props) {
   // Проверка действий пользователя
   const isOwn = props.card.owner._id === currentUser._id;
   const isLiked = props.card.likes.some(i => i._id === currentUser._id);
+  // console.log(isOwn)
+  // console.log(isLiked)
   const cardLikeButtonClassName = ( 
     `element__like ${isLiked && 'element__like_active'}` 
   )

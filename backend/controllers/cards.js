@@ -7,6 +7,7 @@ const ForbiddenError = require('../errors/ForbiddenError');
 const getCards = (req, res, next) => {
   Card.find({})
     .populate(['likes', 'owner'])
+    .sort({ _id: -1 })
     .then((cardList) => res.send(cardList))
     .catch(next);
 };
@@ -17,7 +18,7 @@ const deleteCard = (req, res, next) => {
     .populate('owner')
     .then((card) => {
       if (!card) next(new NotFoundError('Карточка с указанным _id не найдена'));
-      else if (String(req.user._id) === String(card.owner._id)) {
+      else if (req.user._id.toString() === card.owner._id.toString()) {
         Card.deleteOne()
           .then(() => res.send({ message: 'Карточка успешно удалена' }))
           .catch(next);
@@ -46,9 +47,13 @@ const putLike = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
+    .populate(['owner', 'likes'])
     .then((card) => {
-      if (!card) next(new NotFoundError('Передан несуществующий _id карточки'));
-      else res.send(card);
+      if (!card) {
+        next(new NotFoundError('Передан несуществующий _id карточки'));
+      } else {
+        res.send(card);
+      }
     })
     .catch((err) => {
       if (err.name === 'CastError') next(new ValidationError('Переданы некорректные данные для постановки лайка'));
@@ -62,6 +67,7 @@ const deleteLike = (req, res, next) => {
     { $pull: { likes: req.user._id } },
     { new: true },
   )
+    .populate(['owner', 'likes'])
     .then((card) => {
       if (!card) next(new NotFoundError('Передан несуществующий _id карточки'));
       else res.send(card);

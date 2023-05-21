@@ -1,7 +1,6 @@
 const options = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-59',
+  baseUrl: 'https://api.mesto.application.nomoredomains.monster',
   headers: {
-    authorization: '51623cde-03bb-453b-8d97-8650ef55de1f',
     'Content-Type': 'application/json'
   }
 }

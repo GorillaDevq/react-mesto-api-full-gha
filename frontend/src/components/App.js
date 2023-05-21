@@ -113,7 +113,7 @@ function App() {
         setLoadingState(false)
       })
   }
-
+  console.log(selectedCard)
   const handleCardDelete = () => {
     setLoadingState(true)
     api.deleteCard(selectedCard.card._id)
@@ -153,7 +153,7 @@ function App() {
       auth.checkToken(jwt)
         .then((res) => {
           setLoggedIn(true)
-          setEmail(res.data.email)
+          setEmail(res.email)
           navigate('/', {replace: true});
         })
         .catch((err) => {
