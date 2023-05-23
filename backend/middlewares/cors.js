@@ -1,6 +1,6 @@
 const { allowedCors, DEFAULT_ALLOWED_METHODS } = require('../utils/utils');
 
-module.exports = (req, res, next) => {
+module.exports = (req, res, next) => { // eslint-disable-line
   const { origin } = req.headers;
   const { method } = req;
   const requestHeaders = req.headers['access-control-request-headers'];
