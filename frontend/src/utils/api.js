@@ -69,6 +69,7 @@ class Api {
       })
     }
   }
+  
   deleteCard(idCard) {
     return this._request(this._baseUrl + '/cards/' + idCard, {
       method: 'DELETE',
