@@ -72,10 +72,18 @@ const login = (req, res, next) => {
     });
 };
 
-const updateProfile = (req, res, next) => {
-  const { name, about } = req.body;
+const logout = (req, res) => {
+  res.cookie('token', 'asd', {
+    maxAge: 1000,
+    httpOnly: true,
+  });
+  res.send({ message: 'Успешный выход' });
+};
 
-  User.findByIdAndUpdate(req.user._id, { name, about }, {
+const updateProfile = (req, res, next) => {
+  const { name, about, avatar } = req.body;
+
+  User.findByIdAndUpdate(req.user._id, { name, about, avatar }, {
     new: true,
     runValidators: true,
   })
@@ -87,20 +95,6 @@ const updateProfile = (req, res, next) => {
       if (err.name === 'ValidationError') next(new ValidationError('Переданы некорректные данные при обновлении профиля'));
       else next(err);
     });
-};
-
-const updateAvatar = (req, res, next) => {
-  const { avatar } = req.body;
-
-  User.findByIdAndUpdate(req.user._id, { avatar }, {
-    new: true,
-    runValidators: true,
-  })
-    .then((user) => {
-      if (!user) next(new NotFoundError('Пользователь по указанному _id не найден'));
-      else res.send(user);
-    })
-    .catch(next);
 };
 
 const getUserInfo = (req, res, next) => {
@@ -116,7 +110,7 @@ module.exports = {
   getUser,
   createUser,
   updateProfile,
-  updateAvatar,
   login,
   getUserInfo,
+  logout,
 };

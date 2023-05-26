@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
@@ -14,7 +13,7 @@ const app = express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser());
 
 app.use(requestLogger);
@@ -27,8 +26,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use('/', require('./routes/user'));
-app.use('/', require('./routes/card'));
+app.use('/', require('./routes/index'));
 
 app.use('*', (req, res, next) => next(new NotFoundError('Ошибка 404')));
 

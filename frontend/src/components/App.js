@@ -113,7 +113,6 @@ function App() {
         setLoadingState(false)
       })
   }
-  console.log(selectedCard)
   const handleCardDelete = () => {
     setLoadingState(true)
     api.deleteCard(selectedCard.card._id)
@@ -146,34 +145,15 @@ function App() {
       })
       .finally(() => setInfoTooltipOpen(true))
   }
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem('jwt')) {
-      const jwt = localStorage.getItem('jwt')
-      auth.checkToken(jwt)
-        .then((res) => {
-          setLoggedIn(true)
-          setEmail(res.email)
-          navigate('/', {replace: true});
-        })
-        .catch((err) => {
-          switch (err) {
-            case 400:
-              console.log('400 — Токен не передан или передан не в том формате')
-              break
-            case 401:
-              console.log('401 — Переданный токен некорректен')
-              break
-            default:
-              console.log(`Ошибка ${err}`)
-              break
-          } 
-        })
-    }
-  }
-
+  
   const handleLogOut = () => {
-    localStorage.removeItem('jwt')
+    api.logout()
+      .then(() => {
+        setLoggedIn(false)
+        setEmail('')
+        navigate('/sign-in', {replace: true});
+      })
+      .catch(err => console.log(err))
   }
 
   const handleSingIn = ({email, password}) => {
@@ -211,9 +191,6 @@ function App() {
     }
   }, [loggedIn])
 
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, [])
 
   React.useEffect(() => {
     if (!loggedIn) {

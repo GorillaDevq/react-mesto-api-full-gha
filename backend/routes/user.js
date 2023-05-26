@@ -8,14 +8,15 @@ const {
   getUser,
   getUsers,
   updateProfile,
-  updateAvatar,
   getUserInfo,
   createUser,
   login,
+  logout,
 } = require('../controllers/users');
 
 router.get('/users', auth, getUsers);
 router.get('/users/me', auth, getUserInfo);
+router.delete('/users/me', auth, logout);
 
 router.get('/users/:id', auth, celebrate({
   params: Joi.object().keys({
@@ -34,7 +35,7 @@ router.patch('/users/me/avatar', auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().pattern(regex),
   }),
-}), updateAvatar);
+}), updateProfile);
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({

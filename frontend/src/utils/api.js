@@ -91,6 +91,14 @@ class Api {
       })
     })
   }
+
+  logout() {
+    return this._request(this._baseUrl + '/users/me', {
+      method: 'DELETE',
+      credentials: 'include',
+      headers: this._headers,
+    })
+  }
 }
 
 const api = new Api(options)
