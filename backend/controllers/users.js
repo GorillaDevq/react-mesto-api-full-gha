@@ -74,7 +74,7 @@ const login = (req, res, next) => {
 
 const logout = (req, res) => {
   res.cookie('token', 'asd', {
-    maxAge: 1000,
+    maxAge: 100,
     httpOnly: true,
   });
   res.send({ message: 'Успешный выход' });
