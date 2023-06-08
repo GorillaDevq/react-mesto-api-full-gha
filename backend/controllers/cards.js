@@ -36,7 +36,7 @@ const createCard = (req, res, next) => {
     .then((card) => card.populate('owner'))
     .then((card) => res.send(card))
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new ValidationError('Переданы некорректные данные для удаления карточки'));
+      if (err.name === 'ValidationError') next(new ValidationError('Переданы некорректные данные для создания карточки'));
       else next(err);
     });
 };
