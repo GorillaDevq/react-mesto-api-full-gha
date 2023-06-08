@@ -1,21 +1,6 @@
-
-# react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. Бэкенд расположите в директории `backend/`, а фронтенд - в `frontend/`. 
-  
-Адрес репозитория: https://github.com/GorillaDevq/react-mesto-api-full-gha/
-
-## Ссылки на проект
-
-IP 158.160.7.248
-
-Frontend https://mesto.application.nomoredomains.monster
-
-Backend https://api.mesto.application.nomoredomains.monster
-
 # Проект: Место (frontend + backend)
 
 Учебный проект выполненный в рамках курса "Веб-разработчик" от Яндекс Практикум.
-Проект представляет из себя веб-приложение в сборе, имеющие бэкенд часть, основой для которой послужил [проект](https://github.com/Bjorn86/express-mesto-gha) также выполненный в рамках учебного курса, а также фронтенд часть, основой для которого послужил ещё один [проект](https://github.com/Bjorn86/react-mesto-auth) выполненный в рамках указанного выше учебного курса.
 
 ## Оглавление
 
@@ -158,6 +143,6 @@ Backend https://api.mesto.application.nomoredomains.monster
 
 ## Автор
 
-**Данила Легкобытов**
+**Gorilla Dev**
 
-- Telegram: [@danila_legkobytov](https://t.me/gorilla_dev)
+- Telegram: [@gorilladevq](https://t.me/gorilla_dev)
