@@ -8,6 +8,7 @@ const {
   getUser,
   getUsers,
   updateProfile,
+  updateAvatar,
   getUserInfo,
   createUser,
   login,
@@ -35,7 +36,7 @@ router.patch('/users/me/avatar', auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().pattern(regex),
   }),
-}), updateProfile);
+}), updateAvatar);
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({
